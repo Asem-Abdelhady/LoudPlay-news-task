@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LoudPLay News Task</string>
+    <string name="headlines">headlines</string>
+    <string name="topic_news">topic news</string>
+</resources>
