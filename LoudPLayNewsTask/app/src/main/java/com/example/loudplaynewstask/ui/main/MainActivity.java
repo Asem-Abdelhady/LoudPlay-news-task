@@ -1,4 +1,4 @@
-package com.example.loudplaynewstask;
+package com.example.loudplaynewstask.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.loudplaynewstask.ui.headlines.HeadlinesActivity;
+import com.example.loudplaynewstask.R;
+import com.example.loudplaynewstask.ui.topic.TopicNewsActivity;
 
 public class MainActivity extends AppCompatActivity {
     Button headlines, topicNews;

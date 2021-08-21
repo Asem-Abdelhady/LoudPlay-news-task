@@ -1,8 +1,10 @@
-package com.example.loudplaynewstask;
+package com.example.loudplaynewstask.ui.headlines;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.loudplaynewstask.R;
 
 public class HeadlinesActivity extends AppCompatActivity {
 
