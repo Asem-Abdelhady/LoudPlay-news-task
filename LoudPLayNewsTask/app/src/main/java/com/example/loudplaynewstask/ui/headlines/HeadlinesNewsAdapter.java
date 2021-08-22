@@ -55,7 +55,7 @@ public class HeadlinesNewsAdapter extends RecyclerView.Adapter<HeadlinesNewsAdap
         public void bind(NewsArticleModel article, AdapterListener listener) {
             newsTitle.setText(article.getTitle());
             newsDescription.setText(article.getDescription());
-            Picasso.get().load(article.getUrl()).into(newsImage);
+            Picasso.get().load(article.getUrlToImage()).into(newsImage);
             itemView.setOnClickListener(view -> listener.OnItemClickListener(article));
         }
     }
