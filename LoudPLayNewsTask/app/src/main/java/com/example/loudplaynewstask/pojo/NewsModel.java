@@ -13,18 +13,6 @@ public class NewsModel {
     private List<NewsArticleModel> articles = null;
 
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setTotalResults(int totalResults) {
-        this.totalResults = totalResults;
-    }
-
-    public void setArticles(List<NewsArticleModel> articles) {
-        this.articles = articles;
-    }
-
 
     public String getStatus() {
         return status;

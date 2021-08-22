@@ -6,13 +6,12 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.example.loudplaynewstask.R;
-import com.example.loudplaynewstask.pojo.NewsModel;
-
-import java.util.List;
 
 public class HeadlinesActivity extends AppCompatActivity {
 
@@ -27,22 +26,16 @@ public class HeadlinesActivity extends AppCompatActivity {
         headlinesViewModel.getPosts();
 
         headlinesNewsContainer = findViewById(R.id.recycler_headlines_news_container);
-
-
-        headlinesViewModel.errorMessage.observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Log.e("HeadlinesActivity", s);
-            }
-        });
-
-        headlinesViewModel.newsMutableLiveDate.observe(this, new Observer<NewsModel>() {
-            @Override
-            public void onChanged(NewsModel newsModel) {
-                final HeadlinesNewsAdapter headlinesNewsAdapter = new HeadlinesNewsAdapter(newsModel.getArticles());
-                headlinesNewsContainer.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                headlinesNewsContainer.setAdapter(headlinesNewsAdapter);
-            }
+        //Error in data retrieval
+        headlinesViewModel.errorMessage.observe(this, s -> Log.e("HeadlinesActivity", s));
+        //Data retrieved
+        headlinesViewModel.newsMutableLiveDate.observe(this, newsModel -> {
+            final HeadlinesNewsAdapter headlinesNewsAdapter = new HeadlinesNewsAdapter(newsModel.getArticles(), article -> {
+                Intent newsWebPage = new Intent(Intent.ACTION_VIEW, Uri.parse(article.getUrl()));
+                startActivity(newsWebPage);
+            });
+            headlinesNewsContainer.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            headlinesNewsContainer.setAdapter(headlinesNewsAdapter);
         });
     }
 }

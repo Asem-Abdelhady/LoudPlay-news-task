@@ -1,10 +1,6 @@
 package com.example.loudplaynewstask.data;
 
-import android.util.Log;
-
 import com.example.loudplaynewstask.pojo.NewsModel;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -15,7 +11,7 @@ public class NewsRepository {
     private static NewsInterface newsInterface;
     private static NewsRepository newsRepositoryInstance;
 
-    public NewsRepository(){
+    private NewsRepository(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

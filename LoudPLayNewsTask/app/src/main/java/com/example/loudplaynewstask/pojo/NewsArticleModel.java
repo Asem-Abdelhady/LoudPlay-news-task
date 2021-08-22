@@ -21,40 +21,6 @@ public class NewsArticleModel {
     private String content;
 
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public void setUrlToImage(String urlToImage) {
-        this.urlToImage = urlToImage;
-    }
-
-    public void setPublishedAt(String publishedAt) {
-        this.publishedAt = publishedAt;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public void setSource(NewsArticleSourceModel source) {
-        this.source = source;
-    }
-
-
-
 
     public NewsArticleSourceModel getSource() {
         return source;

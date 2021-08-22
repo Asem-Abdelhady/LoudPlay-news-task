@@ -11,16 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loudplaynewstask.R;
 import com.example.loudplaynewstask.pojo.NewsArticleModel;
-import com.example.loudplaynewstask.pojo.NewsModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class HeadlinesNewsAdapter extends RecyclerView.Adapter<HeadlinesNewsAdapter.HeadlinesNewsViewHolder> {
-    private List<NewsArticleModel> newsArticleModels;
+    private List<NewsArticleModel> articles;
+    private AdapterListener listener;
 
-    public HeadlinesNewsAdapter(List<NewsArticleModel> newsArticleModels) {
-        this.newsArticleModels = newsArticleModels;
+    public HeadlinesNewsAdapter(List<NewsArticleModel> newsArticleModels, AdapterListener listener) {
+        this.articles = newsArticleModels;
+        this.listener = listener;
     }
 
     @NonNull
@@ -31,16 +32,12 @@ public class HeadlinesNewsAdapter extends RecyclerView.Adapter<HeadlinesNewsAdap
 
     @Override
     public void onBindViewHolder(@NonNull HeadlinesNewsViewHolder holder, int position) {
-        holder.newsTitle.setText(newsArticleModels.get(position).getTitle());
-        holder.newsDescription.setText(newsArticleModels.get(position).getDescription());
-        if (newsArticleModels.get(position) != null)
-            Picasso.get().load(newsArticleModels.get(position).getUrl()).into(holder.newsImage);
-
+        holder.bind(articles.get(position), listener);
     }
 
     @Override
     public int getItemCount() {
-        return newsArticleModels.size();
+        return articles.size();
     }
 
 
@@ -53,6 +50,13 @@ public class HeadlinesNewsAdapter extends RecyclerView.Adapter<HeadlinesNewsAdap
             newsTitle = itemView.findViewById(R.id.textview_news_title);
             newsDescription = itemView.findViewById(R.id.textview_news_description);
             newsImage = itemView.findViewById(R.id.image_news_image);
+        }
+
+        public void bind(NewsArticleModel article, AdapterListener listener) {
+            newsTitle.setText(article.getTitle());
+            newsDescription.setText(article.getDescription());
+            Picasso.get().load(article.getUrl()).into(newsImage);
+            itemView.setOnClickListener(view -> listener.OnItemClickListener(article));
         }
     }
 
