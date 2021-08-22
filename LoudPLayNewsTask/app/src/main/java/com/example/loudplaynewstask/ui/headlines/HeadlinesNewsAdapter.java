@@ -12,43 +12,47 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.loudplaynewstask.R;
 import com.example.loudplaynewstask.pojo.NewsArticleModel;
 import com.example.loudplaynewstask.pojo.NewsModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class HeadlinesNewsAdapter extends RecyclerView.Adapter<HeadlinesNewsAdapter.HeadlinesNewsViewHolder> {
-    private NewsArticleModel[] newsArticleModels;
+    private List<NewsArticleModel> newsArticleModels;
+
+    public HeadlinesNewsAdapter(List<NewsArticleModel> newsArticleModels) {
+        this.newsArticleModels = newsArticleModels;
+    }
 
     @NonNull
     @Override
     public HeadlinesNewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new HeadlinesNewsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.headlines_row_item,parent,false));
+        return new HeadlinesNewsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.headlines_row_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull HeadlinesNewsViewHolder holder, int position) {
-        holder.newsTitle.setText(newsArticleModels[position].getTitle());
-        holder.newsDescription.setText(newsArticleModels[position].getDescription());
-
+        holder.newsTitle.setText(newsArticleModels.get(position).getTitle());
+        holder.newsDescription.setText(newsArticleModels.get(position).getDescription());
+        if (newsArticleModels.get(position) != null)
+            Picasso.get().load(newsArticleModels.get(position).getUrl()).into(holder.newsImage);
 
     }
 
     @Override
     public int getItemCount() {
-        return newsArticleModels.length;
+        return newsArticleModels.size();
     }
 
-    public void setNewsArticleModels(NewsArticleModel[] newsArticleModels) {
-        this.newsArticleModels = newsArticleModels;
-    }
 
     public class HeadlinesNewsViewHolder extends RecyclerView.ViewHolder {
         TextView newsTitle, newsDescription;
-        ImageView imageView;
+        ImageView newsImage;
+
         public HeadlinesNewsViewHolder(@NonNull View itemView) {
             super(itemView);
             newsTitle = itemView.findViewById(R.id.textview_news_title);
             newsDescription = itemView.findViewById(R.id.textview_news_description);
-            imageView = itemView.findViewById(R.id.image_news_image);
+            newsImage = itemView.findViewById(R.id.image_news_image);
         }
     }
 
